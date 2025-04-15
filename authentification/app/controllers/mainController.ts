@@ -6,6 +6,7 @@ import { ObjectId } from "mongoose";
 
 const log = debug("app:authentication:mainController");
 
+const API_SERVICE_URL = process.env.API_SERVICE_URL!;
 const JWT_SECRET = process.env.JWT_SECRET!;
 interface TokenCredentials {
   id: ObjectId;
@@ -39,6 +40,20 @@ const mainController = {
     log("login", req.body);
 
     // TODO - Login à refaire (fetch vers le service API)
+    try {
+      const response = await fetch(`${API_SERVICE_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }), // transmission des données
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+      
+    }
 
     /*const user = await User.findOne({ email });
     if (!user || !(await verify(password, user.password))) {
