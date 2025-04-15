@@ -1,0 +1,8 @@
+<div class="toasts">
+  <% if(locals.flashMessages) { %> <% for (let flashMessage of
+  locals.flashMessages) { %>
+  <li class="toast toast-<%= flashMessage.type %>">
+    <%= flashMessage.message %>
+  </li>
+  <% } %> <% } %>
+</div>

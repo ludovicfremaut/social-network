@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MonRéseau - Feed</title>
+  <link rel="stylesheet" href="/css/form.css">
+  <link rel="stylesheet" href="/css/feed.css">
+</head>
+<body>
+  <!-- En-tête de navigation -->
+  <header class="header">
+    <h1>MonRéseau</h1>
+    <nav>
+      <span>Connecté en tant que <%= locals.user.email %></span>
+      <a href="/feed">Mon feed</a>
+      <a href="/profile">Mon profil</a>
+      <a href="/logout">Déconnexion</a>
+    </nav>
+  </header>
+
+  <!-- Zone principale du feed -->
+  <h2>Affichage de ma page de profil</h2>
+</body>
+</html>

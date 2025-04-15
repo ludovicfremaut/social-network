@@ -1,0 +1,155 @@
+/* Réinitialisation et styles généraux */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background-repeat: no-repeat;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* En-tête de navigation */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.header h1 {
+  font-size: 1.5em;
+  color: #2575fc;
+}
+
+.header nav span {
+  color: #222;
+  font-weight: bold;
+}
+
+.header nav a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #2575fc;
+  font-weight: bold;
+}
+
+/* Conteneur principal du feed */
+.feed-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  /* Style de chaque publication */
+  .post {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+  }
+
+  .post:last-child {
+    border-bottom: none;
+  }
+
+  .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .post-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .post-header .username {
+    font-weight: bold;
+    color: #2575fc;
+  }
+
+  .post-content {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .post-footer {
+    font-size: 0.9em;
+    color: #777;
+  }
+}
+
+/* Zone des utilisateurs connectés */
+.users-online {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: fixed;
+  padding-bottom: 40px;
+  bottom: 0;
+  right: 2vw;
+}
+
+.users-online h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+.users-online ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.users-online li {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.users-online img {
+  border-radius: 50%;
+  width: 2rem;
+}
+
+/* Toasts */
+.toasts {
+  position: absolute;
+  bottom: 10px;
+  right: 30px;
+}
+
+.toast {
+  display: block;
+  background: grey;
+  font-weight: bold;
+  padding: 1rem 2rem;
+}
+
+.toast-danger {
+  background: #cf8b8b;
+  color: #930909;
+}
+
+.toast-success {
+  background: #9ecf8b;
+  color: #187009;
+}

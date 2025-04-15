@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MonRéseau - Feed</title>
+  <link rel="stylesheet" href="/css/form.css">
+  <link rel="stylesheet" href="/css/feed.css">
+</head>
+<body>
+  <!-- En-tête de navigation -->
+  <%- include('./toast.ejs') %>
+  <header class="header">
+    <h1>MonRéseau</h1>
+    <nav>
+      <span>Connecté en tant que <%= locals.user.email %></span>
+      <a href="/feed">Mon feed</a>
+      <a href="/profile">Mon profil</a>
+      <a href="/logout">Déconnexion</a>
+    </nav>
+  </header>
+
+  <!-- Zone principale du feed -->
+  <div class="feed-container">
+    <!-- Exemple de post -->
+    <div class="post">
+      <div class="post-header">
+        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Avatar de Utilisateur1">
+        <span class="username">Utilisateur1</span>
+      </div>
+      <div class="post-content">
+        Bonjour à tous ! Voici mon premier post sur MonRéseau. J'espère que vous passerez une excellente journée !
+      </div>
+      <div class="post-footer">
+        Il y a 2 heures
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-header">
+        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Avatar de Utilisateur2">
+        <span class="username">Utilisateur2</span>
+      </div>
+      <div class="post-content">
+        Quel beau jour pour partager mes pensées. La vie est belle, profitez-en !
+      </div>
+      <div class="post-footer">
+        Il y a 4 heures
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-header">
+        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Avatar de Utilisateur3">
+        <span class="username">Utilisateur3</span>
+      </div>
+      <div class="post-content">
+        J'adore ce réseau social, c'est vraiment agréable de pouvoir échanger et partager des moments ensemble.
+      </div>
+      <div class="post-footer">
+        Il y a 1 jour
+      </div>
+    </div>
+  </div>
+
+  <div class="users-online">
+    <h2>Utilisateurs</h2>
+    <ul>
+      <% for (let user of locals.users) { %>
+        <li>
+          <img src="<%= user.image %>" />
+          <%= user.firstname %> <%= user.lastname %>
+        </li>
+        <% } %>
+    </ul>
+  </div>
+</body>
+</html>
