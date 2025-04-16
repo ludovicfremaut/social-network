@@ -42,7 +42,7 @@ const mainController = {
     // TODO - Login à refaire (fetch vers le service API)
     try {
       const response = await fetch(`${API_SERVICE_URL}/login`, {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
