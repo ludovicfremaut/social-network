@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 const mongoURL = process.env.MONGO_URL!;
 mongoose.connect(mongoURL);
@@ -11,10 +11,10 @@ const postSchema = new mongoose.Schema(
     },
     body: {
       type: String,
-      required: false,
+      required: true,
     },
     author: {
-      type: Number,
+      type: Types.ObjectId,
       required: true,
       ref: "User",
     },

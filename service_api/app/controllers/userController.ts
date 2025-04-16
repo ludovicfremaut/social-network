@@ -14,14 +14,14 @@ const userController = {
       res.status(404).json({ message: "User not found" });
       return;
     }
-    res.status(200).json({ user: user });
+    res.status(200).json({ user });
   },
 
   async create(req: Request, res: Response) {
-    const { firstname, lastname, email, hashedPassword, description, image } =
+    const { firstname, lastname, email, password, hashedPassword, description, image } =
       req.body;
     const user = await User.findOne({ email });
-    if (!user) {
+    if (user) {
       res.status(409).json({ message: "User already exists" });
       return;
     }
@@ -29,7 +29,7 @@ const userController = {
       firstname: firstname,
       lastname,
       email,
-      password: hashedPassword,
+      password,
       description,
       image,
     });

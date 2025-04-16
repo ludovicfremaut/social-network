@@ -17,10 +17,32 @@ const postController = {
     async detail(req: Request, res: Response) {
     },
     async create(req: Request, res: Response) {
+        const { title, body, author } = req.body
+        const newPost = new Post({
+            title: title,
+            body: body,
+            author: author,
+        })
+        try {
+            await newPost.save()
+            console.log(newPost)
+            res.status(201).json({ post: newPost })
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({ message: "Erreur durant la création d'un post !" })
+        }
     },
     async update(req: Request, res: Response) {
     },
     async delete(req: Request, res: Response) {
+        const { id } = req.params
+        try {
+            await Post.findByIdAndDelete(id)
+            res.status(200).json({ message: "Post supprimé !" })
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({ message: "Erreur durant la suppression d'un post !" })
+        }
     },
 }
 

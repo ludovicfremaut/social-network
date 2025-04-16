@@ -57,7 +57,14 @@ const mainController = {
     }
   },
   getLogout(req: Request, res: Response) {
-    // TODO ici le traitement du logout (POST) - challenge journée 3 - rediriger vers la page home
+    //* OK ici le traitement du logout (POST) - challenge journée 3 - rediriger vers la page home
+    //* OK supprimer le cookie JWT
+    //* OK supprimer le cookie flashMessages
+    //* ok rediriger l'utilisateur sur la page home
+
+    res.clearCookie("token");
+    res.clearCookie("flashMessages");
+    res.redirect("/");
   },
 
   // -------------
@@ -126,19 +133,37 @@ const mainController = {
   async getFeed(req: Request, res: Response) {
     try {
       // TODO - Récupérer les posts et les utilisateurs dans le service API
-      const response = await fetch(`${API_SERVICE_URL}/users`, {
+
+      // Récupération des Users
+
+      const UserResponse = await fetch(`${API_SERVICE_URL}/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         }
       });
-      const data = await response.json()
-      const users = data.users
-      debug("app:main:controller")(users);
+      const userData = await UserResponse.json()
+      const users = userData.users
+      // debug("app:main:controller")(users);
+
+      // Récupération des posts
+      const PostResponse = await fetch(`${API_SERVICE_URL}/posts`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+      const postData = await PostResponse.json()
+      const posts = postData.posts
+      // debug("app:main:controller")(posts);
+      
       if (!users) {
         return console.log("No users in database");
       }
-      res.render("feed", { users });
+      res.render("feed", { 
+        users,
+        posts,
+      });
     } catch (error) {
       return console.log(error);
     }

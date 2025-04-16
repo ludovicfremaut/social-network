@@ -6,8 +6,9 @@ import { ObjectId } from "mongoose";
 
 const log = debug("app:authentication:mainController");
 
-const API_SERVICE_URL = process.env.API_SERVICE_URL!;
 const JWT_SECRET = process.env.JWT_SECRET!;
+const API_SERVICE_URL = process.env.API_SERVICE_URL!;
+
 interface TokenCredentials {
   id: ObjectId;
   firstname: string;
@@ -39,25 +40,20 @@ const mainController = {
     const { email, password } = req.body;
     log("login", req.body);
 
-    // TODO - Login à refaire (fetch vers le service API)
-    try {
-      const response = await fetch(`${API_SERVICE_URL}/login`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }), // transmission des données
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Internal server error" });
-      return;
-      
-    }
+    // TODO - Gérer le try/catch + les status code HTTP (500)
 
-    /*const user = await User.findOne({ email });
+    // TODO - Login à refaire (fetch vers le service API)
+    const response = await fetch(`${API_SERVICE_URL}/users/${email}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    const user = data.user;
+
     if (!user || !(await verify(password, user.password))) {
-      res.status(401).json({ error: "Invalid credentials" });
+      res.status(401).json({ error: "Identifiants invalides" });
       return;
     }
 
@@ -68,11 +64,11 @@ const mainController = {
       email: user.email,
       role: user.role_id,
     });
-    res.json({ status: "success", data: { token } });*/
+    res.json({ status: "success", data: { token } });
   },
 
   async cryptPassword(req: Request, res: Response) {
-    const password = "test";
+    const { password } = req.params;
     if (password) {
       const passwordHash = await hash(password.toString());
       res.json({ status: "success", data: { password, passwordHash } });
@@ -91,7 +87,7 @@ const mainController = {
 
     if (!hashedPassword) {
       console.log("erreur lors du hash");
-      res.json({ err: "Merci de réessayer" }).status(500)
+      res.json({ err: "Merci de réessayer" }).status(500);
     }
 
     // TODO - Refaire cette partie - on va devoir faire un fetch vers le service API

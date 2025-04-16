@@ -25,6 +25,7 @@ services:
     volumes:
       - ./authentification:/app
     environment:
+      - API_SERVICE_URL=http://service_api:3000
       - JWT_SECRET=abcde123456
     depends_on:
       - userdb
