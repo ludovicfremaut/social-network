@@ -6,7 +6,7 @@
   "dependencies": {
     "debug": "^4.4.0",
     "express": "^5.1.0",
-    "mongoose": "^8.13.2"
+    "mongoose": "^8.14.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.12",
